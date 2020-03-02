@@ -26,11 +26,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
+    	<artifactId>mailer_data</artifactId>
+        <groupId>com.mailer</groupId>
+        <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
+    
   </dependencies>
 
   <build>

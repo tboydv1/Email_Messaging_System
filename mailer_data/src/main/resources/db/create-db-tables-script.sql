@@ -8,84 +8,90 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema mailer-app
+-- Schema mailer_app
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mailer_app` ;
 
 -- -----------------------------------------------------
--- Schema mailer-app
+-- Schema mailer_app
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mailer-app` DEFAULT CHARACTER SET latin1 ;
-USE `mailer-app` ;
+CREATE SCHEMA IF NOT EXISTS `mailer_app` DEFAULT CHARACTER SET latin1 ;
+USE `mailer_app` ;
 
 -- -----------------------------------------------------
--- Table `mailer-app`.`AddressBook`
+-- Table `mailer_app`.`address_book`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mailer-app`.`AddressBook` ;
+DROP TABLE IF EXISTS `mailer_app`.`address_book` ;
 
-CREATE TABLE IF NOT EXISTS `mailer-app`.`AddressBook` (
-  `id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mailer_app`.`address_book` (
+  `id` INT(11) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mailer-app`.`Client`
+-- Table `mailer_app`.`client`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mailer-app`.`Client` ;
+DROP TABLE IF EXISTS `mailer_app`.`client` ;
 
-CREATE TABLE IF NOT EXISTS `mailer-app`.`Client` (
-  `client_id` INT NOT NULL,
-  `firstname` VARCHAR(45) NULL,
-  `lastname` VARCHAR(45) NULL,
-  `email` VARCHAR(45) NULL,
-  `AddressBook_book_id` INT NOT NULL,
-  `date_added` DATE NOT NULL,
+CREATE TABLE IF NOT EXISTS `mailer_app`.`client` (
+  `client_id` INT(11) NOT NULL,
+  `firstname` VARCHAR(45) NULL DEFAULT NULL,
+  `lastname` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `addressBook_id` INT(11) NOT NULL,
+  `date_added` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`client_id`),
-  INDEX `fk_Client_AddressBook1_idx` (`AddressBook_book_id` ASC),
+  INDEX `fk_Client_AddressBook1_idx` (`addressBook_id` ASC),
   CONSTRAINT `fk_Client_AddressBook1`
-    FOREIGN KEY (`AddressBook_book_id`)
-    REFERENCES `mailer-app`.`AddressBook` (`id`)
+    FOREIGN KEY (`addressBook_id`)
+    REFERENCES `mailer_app`.`address_book` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mailer-app`.`Message`
+-- Table `mailer_app`.`message`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mailer-app`.`Message` ;
+DROP TABLE IF EXISTS `mailer_app`.`message` ;
 
-CREATE TABLE IF NOT EXISTS `mailer-app`.`Message` (
-  `message_id` INT NOT NULL,
-  `subject` VARCHAR(45) NULL,
-  `body` VARCHAR(45) NULL,
-  `date_sent` DATE NOT NULL,
+CREATE TABLE IF NOT EXISTS `mailer_app`.`message` (
+  `message_id` INT(11) NOT NULL,
+  `subject` VARCHAR(45) NULL DEFAULT NULL,
+  `body` VARCHAR(45) NULL DEFAULT NULL,
+  `date_sent` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`message_id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `mailer-app`.`MessageRecipient`
+-- Table `mailer_app`.`message_recipient`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mailer-app`.`MessageRecipient` ;
+DROP TABLE IF EXISTS `mailer_app`.`message_recipient` ;
 
-CREATE TABLE IF NOT EXISTS `mailer-app`.`MessageRecipient` (
-  `Client_client_id` INT NOT NULL,
-  `Message_message_id` INT NOT NULL,
-  PRIMARY KEY (`Client_client_id`, `Message_message_id`),
-  INDEX `fk_Client_has_Message_Message1_idx` (`Message_message_id` ASC),
-  INDEX `fk_Client_has_Message_Client_idx` (`Client_client_id` ASC),
+CREATE TABLE IF NOT EXISTS `mailer_app`.`message_recipient` (
+  `client_id` INT(11) NOT NULL,
+  `message_id` INT(11) NOT NULL,
+  PRIMARY KEY (`client_id`, `message_id`),
+  INDEX `fk_Client_has_Message_Message1_idx` (`message_id` ASC),
+  INDEX `fk_Client_has_Message_Client_idx` (`client_id` ASC),
   CONSTRAINT `fk_Client_has_Message_Client`
-    FOREIGN KEY (`Client_client_id`)
-    REFERENCES `mailer-app`.`Client` (`client_id`)
+    FOREIGN KEY (`client_id`)
+    REFERENCES `mailer_app`.`client` (`client_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Client_has_Message_Message1`
-    FOREIGN KEY (`Message_message_id`)
-    REFERENCES `mailer-app`.`Message` (`message_id`)
+    FOREIGN KEY (`message_id`)
+    REFERENCES `mailer_app`.`message` (`message_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

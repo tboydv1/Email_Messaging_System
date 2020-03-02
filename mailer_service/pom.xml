@@ -11,6 +11,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mailer_service</artifactId>
+ 
+ 	<dependencies>
+    <dependency>
+    	<artifactId>mailer_data</artifactId>
+        <groupId>com.mailer</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    
+    </dependencies>   
 
 
 </project>
