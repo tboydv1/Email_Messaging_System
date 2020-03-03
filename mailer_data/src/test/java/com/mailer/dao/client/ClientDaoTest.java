@@ -1,47 +1,62 @@
 package com.mailer.dao.client;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.List;
-
-import com.mailer.MainApplication;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.mailer.DataConfig;
+import com.mailer.dao.ClientDao;
+import com.mailer.entities.Client;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.mailer.dao.ClientDaoImpl;
-import com.mailer.entities.Client;
-import org.springframework.test.context.junit4.SpringRunner;
+import java.util.List;
+import java.util.logging.Logger;
 
-@SpringBootTest
+
+//@RunWith(SpringRunner.class)
+//@ContextConfiguration(classes = DataConfig.class)
+@SpringBootTest(classes = DataConfig.class)
 @Sql(scripts = {"classpath:/db/insert-client-messages-script.sql"})
 class ClientDaoTest {
 
+	Logger log = Logger.getLogger(getClass().getName());
 
-	
+
 	@Autowired
-	private ClientDaoImpl clientDaoImpl;
+	private ClientDao clientDaoImpl;
 
-	@BeforeEach
-	void setUp() throws Exception {
-	}
+	@Test
+	public void contextLoads(){
 
-	@AfterEach
-	void tearDown() throws Exception {
+		assertThat(clientDaoImpl).isNotNull();
 	}
 
 	@Test
-	void findAllClientsTest() {
-		
-		List<Client> result = clientDaoImpl.findAll();
-		assertNotNull(result);
-		
+	public void findAllClientsTest(){
+
+		log.info("Running test for find all clients method");
+		List<Client> savedClients = clientDaoImpl.findAll();
+
+		log.info("Fetched results: ");
+		assertThat(savedClients).isNotNull();
+
+		savedClients.forEach(System.out::println);
+
+		log.info("find all method completed successfully");
+
 	}
+
+
+
+
+	@SpringBootApplication
+	static class TestConfiguration{
+	}
+
+
 	
 
 }

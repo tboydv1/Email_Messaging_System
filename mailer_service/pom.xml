@@ -13,6 +13,7 @@
     <artifactId>mailer_service</artifactId>
  
  	<dependencies>
+
     <dependency>
     	<artifactId>mailer_data</artifactId>
         <groupId>com.mailer</groupId>

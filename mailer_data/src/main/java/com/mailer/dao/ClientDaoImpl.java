@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import com.mailer.entities.Client;
 public class ClientDaoImpl implements ClientDao {
 
 	Logger logger = Logger.getLogger(getClass().getName());
+
 	@Autowired
 	private EntityManager entityManager;
 	

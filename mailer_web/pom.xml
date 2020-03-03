@@ -20,13 +20,13 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>13</maven.compiler.source>
+    <maven.compiler.target>13</maven.compiler.target>
   </properties>
 
   <dependencies>
     <dependency>
-    	<artifactId>mailer_data</artifactId>
+    	<artifactId>mailer_service</artifactId>
         <groupId>com.mailer</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>

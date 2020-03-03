@@ -3,6 +3,7 @@ package com.mailer.controller.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,8 @@ import com.mailer.entities.Client;
 @RestController
 public class RecipientController {
 
+	@Autowired
+	public JavaMailSender emailSender;
 	
 	@Autowired
 	ClientDao clientDaoImpl;

@@ -1,4 +1,4 @@
-package com.mailer.email;
+package com.mailer.service.emailservice;
 
 import com.mailer.entities.Client;
 import com.mailer.entities.Message;
