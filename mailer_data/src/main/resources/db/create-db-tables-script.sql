@@ -24,7 +24,7 @@ USE `mailer_app` ;
 DROP TABLE IF EXISTS `mailer_app`.`address_book` ;
 
 CREATE TABLE IF NOT EXISTS `mailer_app`.`address_book` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -37,7 +37,7 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `mailer_app`.`client` ;
 
 CREATE TABLE IF NOT EXISTS `mailer_app`.`client` (
-  `client_id` INT(11) NOT NULL,
+  `client_id` INT(11) NOT NULL AUTO_INCREMENT,
   `firstname` VARCHAR(45) NULL DEFAULT NULL,
   `lastname` VARCHAR(45) NULL DEFAULT NULL,
   `email` VARCHAR(45) NULL DEFAULT NULL,
@@ -60,7 +60,7 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `mailer_app`.`message` ;
 
 CREATE TABLE IF NOT EXISTS `mailer_app`.`message` (
-  `message_id` INT(11) NOT NULL,
+  `message_id` INT(11) NOT NULL AUTO_INCREMENT,
   `subject` VARCHAR(45) NULL DEFAULT NULL,
   `body` VARCHAR(45) NULL DEFAULT NULL,
   `date_sent` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

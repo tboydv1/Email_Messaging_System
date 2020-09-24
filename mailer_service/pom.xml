@@ -6,6 +6,7 @@
         <artifactId>mailer_parent</artifactId>
         <groupId>com.mailer</groupId>
         <version>0.0.1-SNAPSHOT</version>
+	<relativePath>./</relativePath>
     </parent>
     
     <modelVersion>4.0.0</modelVersion>
